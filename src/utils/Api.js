@@ -1,4 +1,4 @@
-import { BASE_URL, API_KEY } from './utils.js'
+import { BASE_URL, API_KEY } from './utils';
 
 class Api {
   constructor(config) {
@@ -70,18 +70,32 @@ class Api {
     })
   }
 
-  putCardLike (cardId) {
-    return this._request(`${this._url}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers,
-    })
-  }
+  // putCardLike (cardId) {
+  //   return this._request(`${this._url}/cards/${cardId}/likes`, {
+  //     method: 'PUT',
+  //     headers: this._headers,
+  //   })
+  // }
   
-  deleteCardLike (cardId) {
-    return this._request(`${this._url}/cards/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
+  // deleteCardLike (cardId) {
+  //   return this._request(`${this._url}/cards/${cardId}/likes`, {
+  //     method: 'DELETE',
+  //     headers: this._headers,
+  //   })
+  // }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return this._request(`${this._url}/cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: this._headers,
+      })
+    } else {
+      return this._request(`${this._url}/cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+      })
+    }
   }
 }
 

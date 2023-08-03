@@ -25,17 +25,17 @@ function PopupWithForm({ name, title, buttonText, isOpen, onClose, children }) {
             onClose()
         }
     }
-
+// "popup__input-disabled" класс для неактивной кнопки 
     return (
         <div className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}
             onClick={handleOverlayClick}>
             <div className="popup__container">
                 <button type="button" className="popup__close" onClick={onClose}></button>
                 <h2 className="popup__title">{title}</h2>
-                <form name={`${name}-form`} className={`popup__form popup__form_${name}`} noValidate>
+                <form name={`${name}-form`} className={`popup__form popup__form_${name}`}>
                     {children}
                     <button type="submit" name="submit" value="submit"
-                        className="popup__input-save popup__input-disabled" disabled>{buttonText}
+                        className="popup__input-save">{buttonText} 
                     </button>
                 </form>
             </div>
