@@ -10,19 +10,20 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         setLink('');
     }, [isOpen]);
 
+    
+    function handlePlaceChange(e) {
+        setName(e.target.value);
+    }
+    
+    function handleLinkChange(e) {
+        setLink(e.target.value);
+    }
+    
     function handleSubmit(e) {
         e.preventDefault();
         onAddPlace({ name, link });
     }
-
-    function handlePlaceChange(e) {
-        setName(e.target.value);
-    }
-
-    function handleLinkChange(e) {
-        setLink(e.target.value);
-    }
-
+    
     return (
         <PopupWithForm
             name="add-card"

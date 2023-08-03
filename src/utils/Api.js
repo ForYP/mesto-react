@@ -52,47 +52,33 @@ class Api {
     })
   }
 
-  updateCards(name, link) {
+  updateCards(item) {
     return this._request(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name: item.name,
+        link: item.link,
       })
     })
   }
 
-  deleteCardApi(cardId) {
-    return this._request(`${this._url}/cards/${cardId}`, {
+  deleteCard(card) {
+    return this._request(`${this._url}/cards/${card._id}`, {
       method: 'DELETE',
       headers: this._headers,
     })
   }
 
-  // putCardLike (cardId) {
-  //   return this._request(`${this._url}/cards/${cardId}/likes`, {
-  //     method: 'PUT',
-  //     headers: this._headers,
-  //   })
-  // }
-  
-  // deleteCardLike (cardId) {
-  //   return this._request(`${this._url}/cards/${cardId}/likes`, {
-  //     method: 'DELETE',
-  //     headers: this._headers,
-  //   })
-  // }
-
-  changeLikeCardStatus(cardId, isLiked) {
+  changeLikeCardStatus(card, isLiked) {
     if (isLiked) {
-      return this._request(`${this._url}/cards/${cardId}/likes`, {
-        method: "DELETE",
+      return this._request(`${this._url}/cards/${card._id}/likes`, {
+        method: 'DELETE',
         headers: this._headers,
       })
     } else {
-      return this._request(`${this._url}/cards/${cardId}/likes`, {
-        method: "PUT",
+      return this._request(`${this._url}/cards/${card._id}/likes`, {
+        method: 'PUT',
         headers: this._headers,
       })
     }

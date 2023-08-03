@@ -40,13 +40,12 @@ function App() {
   }, [])
 
   function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    return api.changeLikeCardStatus(card._id, !isLiked)
+    const isLiked = card.likes.some((c) => c._id === currentUser._id);
+    return api.changeLikeCardStatus(card, isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
       })
       .catch(console.error)
   }
@@ -55,39 +54,47 @@ function App() {
     return api.deleteCard(card)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
-        closeAllPopups();
       })
       .catch(console.error)
+      .finally(() => {
+        closeAllPopups()
+      })
   }
 
   function handleUpdateUser(value) {
     return api.updateUserInfo(value)
       .then((res) => {
         setCurrentUser(res);
-        closeAllPopups();
       })
       .catch(console.error)
+      .finally(() => {
+        closeAllPopups()
+      })
   }
 
   function handleUpdateAvatar(value) {
     return api.updateAvatar(value)
       .then((res) => {
         setCurrentUser(res);
-        closeAllPopups();
       })
       .catch(console.error)
+      .finally(() => {
+        closeAllPopups()
+      })
   }
 
   function handleAddPlaceSubmit(value) {
     return api.updateCards(value)
       .then((newCard) => {
         setCards([newCard, ...cards]);
-        closeAllPopups();
       })
       .catch(console.error)
+      .finally(() => {
+        closeAllPopups()
+      })
   }
 
-  function handleOpenCardDeletePopup (card)  {
+  function handleOpenCardDeletePopup(card) {
     setIsDeleteCardPopupOpen(true);
     setCardDelete(card);
   };

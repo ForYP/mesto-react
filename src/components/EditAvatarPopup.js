@@ -7,15 +7,14 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     const avatarRef = useRef();
 
     useEffect(() => {
-        avatarRef.current.value = '';
+        avatarRef.current.value ='';
     }, [currentUser]);
 
     function handleSubmit(e) {
         e.preventDefault();
-
-        onUpdateAvatar({
-            avatar: avatarRef.current.value,
-        });
+        onUpdateAvatar(
+            avatarRef.current.value,
+        );
     }
 
     return (
@@ -34,7 +33,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
                 className="popup__input popup__input_type_link"
                 placeholder="Ссылка на картинку"
                 required
-                ref={avatarRef} />
+                ref={avatarRef}
+            />
 
             <span id="error-avatar-link" className="popup__error-message"></span>
 

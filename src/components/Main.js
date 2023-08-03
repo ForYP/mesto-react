@@ -27,10 +27,10 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
         <button className="profile__add-button" type="button" onClick={onAddPlace}></button>
       </section>
       <section className="elements">
-        {cards.map((item) => (
+        {cards.map((card) => (
           <Card
-            key={item._id}
-            card={item}
+            key={card._id}
+            card={card}
             onCardClick={onCardClick}
             onCardLike={onCardLike}
             onCardDelete={onCardDelete}

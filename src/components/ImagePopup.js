@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function ImagePopup({ card, onClose }) {
+function ImagePopup({ card, onClose, isOpen }) {
 
     useEffect(() => {
         const handleEscClick = (evt) => {
@@ -27,9 +27,13 @@ function ImagePopup({ card, onClose }) {
     }
 
     return (
-        <div className={`popup popup_type_card-photo ${card ? 'popup_opened' : ''}`} onClick={handleOverlayClick}>
+        <div className={`popup popup_type_card-photo ${isOpen ? 'popup_opened' : ''}`} onClick={handleOverlayClick}>
             <div className="popup__container popup__container_card_photo">
-                <button type="button" className="popup__close" onClick={onClose}></button>
+                <button
+                    type="button"
+                    className="popup__close"
+                    onClick={onClose}>
+                </button>
                 <figure className="popup__photo">
                     <img className="popup__img" src={card?.link} alt={card?.name} />
                     <figcaption className="popup__figcaption">{card?.name}</figcaption>
