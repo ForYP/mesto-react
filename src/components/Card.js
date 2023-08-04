@@ -23,8 +23,17 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     return (
 
         <article className="element">
-            {isOwn && <button className="element__del" type="button" onClick={handleDeleteClick} />}
-            <img src={card.link} alt={card.name} className="element__photo" onClick={handleClick} />
+            {isOwn && <button
+                className="element__del"
+                type="button"
+                onClick={handleDeleteClick}
+            />}
+            <img
+                src={card.link}
+                alt={card.name}
+                className="element__photo"
+                onClick={handleClick}
+            />
             <div className="element__description">
                 <h2 className="element__title">{card.name}</h2>
                 <div className="element__like-container">

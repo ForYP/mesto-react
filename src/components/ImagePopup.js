@@ -10,14 +10,14 @@ function ImagePopup({ card, onClose, isOpen }) {
             }
         }
 
-        if (card) {
+        if (isOpen) {
             document.addEventListener('keydown', handleEscClick)
         }
 
         return () => {
             document.removeEventListener('keydown', handleEscClick)
         }
-    })
+    }, [isOpen])
 
 
     function handleOverlayClick(evt) {

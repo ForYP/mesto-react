@@ -17,7 +17,7 @@ function PopupWithForm({ name, title, buttonText, isOpen, onClose, children, onS
         return () => {
             document.removeEventListener('keydown', handleEscClick)
         }
-    })
+    }, [isOpen])
 
 
     function handleOverlayClick(evt) {
