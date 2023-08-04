@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useRef } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
     const currentUser = useContext(CurrentUserContext);
     const avatarRef = useRef();
 
@@ -21,7 +21,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, onLoading }) {
         <PopupWithForm
             name="edit-avatar"
             title="Обновить аватар"
-            buttonText={onLoading ? 'Сохранение...' : 'Сохранить'}
+            buttonText={isLoading ? 'Сохранение...' : 'Сохранить'}
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
 
@@ -10,25 +10,25 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, onLoading }) {
         setLink('');
     }, [isOpen]);
 
-    
+
     function handlePlaceChange(e) {
         setName(e.target.value);
     }
-    
+
     function handleLinkChange(e) {
         setLink(e.target.value);
     }
-    
+
     function handleSubmit(e) {
         e.preventDefault();
         onAddPlace({ name, link });
     }
-    
+
     return (
         <PopupWithForm
             name="add-card"
             title="Новое место"
-            buttonText={onLoading ? 'Сохранение...' : 'Создать'}
+            buttonText={isLoading ? 'Сохранение...' : 'Создать'}
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}>

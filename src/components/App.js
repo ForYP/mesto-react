@@ -17,7 +17,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  
+  const [isAddPlaceLoading, setIsAddPlaceLoading] = useState(false);
+  const [isDeleteCardLoading, setIsDeleteCardLoading] = useState(false);
+  const [isEditAvatarLoading, setIsEditAvatarLoading] = useState(false);
+  const [isEditProfileLoading, setIsEditProfileLoading] = useState(false);
 
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
@@ -45,47 +49,47 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    setIsLoading(true)
+    setIsDeleteCardLoading(true)
     return api.deleteCard(card)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
         closeAllPopups()
       })
       .catch(console.error)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsDeleteCardLoading(false))
   }
 
   function handleUpdateUser(value) {
-    setIsLoading(true)
+    setIsEditProfileLoading(true)
     return api.updateUserInfo(value)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
       .catch(console.error)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsEditProfileLoading(false))
   }
 
   function handleUpdateAvatar(value) {
-    setIsLoading(true)
+    setIsEditAvatarLoading(true)
     return api.updateAvatar(value)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
       .catch(console.error)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsEditAvatarLoading(false))
   }
 
   function handleAddPlaceSubmit(value) {
-    setIsLoading(true)
+    setIsAddPlaceLoading(true)
     return api.updateCards(value)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
       .catch(console.error)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsAddPlaceLoading(false))
   }
 
   function handleOpenCardDeletePopup(card) {
@@ -139,21 +143,21 @@ function App() {
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          onLoading={isLoading}
+          isLoading={isEditAvatarLoading}
         />
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          onLoading={isLoading}
+          isLoading={isEditProfileLoading}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          onLoading={isLoading}
+          isLoading={isAddPlaceLoading}
         />
 
         <DeleteCardPopup
@@ -161,7 +165,7 @@ function App() {
           onClose={closeAllPopups}
           onDeleteCard={handleCardDelete}
           card={cardDelete}
-          onLoading={isLoading}
+          isLoading={isDeleteCardLoading}
         />
 
         <ImagePopup
